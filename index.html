@@ -3,87 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Калькулятор победителя настольного тенниса (Статический)</title>
+    <title>Калькулятор победителя настольного тенниса (Компактный)</title>
     <!-- Подключение Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Подключение вашего пользовательского CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
-        /* Пользовательские стили для адаптивности на планшетах */
+        /* Пользовательские стили для центрирования формы на больших экранах */
+        /* На узких экранах эти стили не применяются благодаря медиазапросу */
         @media (min-width: 768px) {
             .form-container {
                 max-width: 700px; /* Ограничиваем ширину формы на больших экранах */
                 margin: auto; /* Центрируем форму */
             }
         }
+
+        /* Стили для меток, чтобы они не занимали слишком много места по вертикали */
+        .form-label {
+            display: block; /* Метка занимает всю ширину */
+            margin-bottom: 0.2rem; /* Уменьшаем отступ снизу */
+            font-weight: normal; /* Обычный шрифт вместо жирного */
+        }
+
+         /* Уменьшаем размер шрифта и отступов на очень узких экранах */
+        @media (max-width: 576px) { /* breakpoint 'sm' в Bootstrap */
+            .form-label {
+                font-size: 0.8rem; /* Уменьшаем размер шрифта меток */
+            }
+            h3 {
+                font-size: 1rem; /* Уменьшаем размер заголовков игроков */
+                margin-bottom: 0.5rem !important; /* Уменьшаем нижний отступ заголовков */
+            }
+             .mb-1 {
+                 margin-bottom: 0.25rem !important; /* Уменьшаем вертикальный отступ между полями еще больше */
+             }
+             .card {
+                 padding: 1rem !important; /* Уменьшаем внутренние отступы карточки */
+             }
+        }
     </style>
 </head>
 <body class="bg-light">
-    <div class="container mt-5">
-        <div class="form-container card p-4 shadow-sm">
-            <h1 class="text-center mb-4">Калькулятор победителя матча по настольному теннису</h1>
+    <div class="container mt-3"> {# Уменьшаем верхний отступ контейнера #}
+        <div class="form-container card p-3 shadow-sm"> {# Уменьшаем внутренние отступы карточки по умолчанию #}
+            <h1 class="text-center mb-3" style="font-size: 1.5rem;">Калькулятор победителя настольного тенниса</h1> {# Уменьшаем размер заголовка H1 #}
 
-            <p class="text-muted text-center">Введите коэффициенты для геймов 5-10 для каждого игрока.</p>
+            <p class="text-muted text-center mb-3" style="font-size: 0.9rem;">Введите коэффициенты для геймов 5-10 для каждого игрока.</p> {# Уменьшаем размер текста описания #}
 
             <div class="row">
-                <div class="col-md-6">
-                    <h3 class="mb-3">Игрок 1</h3>
+                <div class="col-6"> {# Используем col-6 для 2 колонок на всех размерах #}
+                    <h3 class="text-center mb-2">Игрок 1</h3> {# Выравниваем заголовок по центру и уменьшаем отступ #}
                     <form id="player1Form">
-                        <div class="mb-3">
-                            <label for="player1_game5" class="form-label">Коэффициент гейма 5:</label>
-                            <input type="number" step="0.001" class="form-control" id="player1_game5" name="game5" required>
+                        <div class="mb-1">
+                            <label for="player1_game5" class="form-label">Гейм 5:</label>
+                            <input type="number" step="0.001" class="form-control form-control-sm" id="player1_game5" name="game5" required>
                         </div>
-                        <div class="mb-3">
-                            <label for="player1_game6" class="form-label">Коэффициент гейма 6:</label>
-                            <input type="number" step="0.001" class="form-control" id="player1_game6" name="game6" required>
+                        <div class="mb-1">
+                            <label for="player1_game6" class="form-label">Гейм 6:</label>
+                            <input type="number" step="0.001" class="form-control form-control-sm" id="player1_game6" name="game6" required>
                         </div>
-                        <div class="mb-3">
-                            <label for="player1_game7" class="form-label">Коэффициент гейма 7:</label>
-                            <input type="number" step="0.001" class="form-control" id="player1_game7" name="game7" required>
+                         <div class="mb-1">
+                            <label for="player1_game7" class="form-label">Гейм 7:</label>
+                            <input type="number" step="0.001" class="form-control form-control-sm" id="player1_game7" name="game7" required>
                         </div>
-                        <div class="mb-3">
-                            <label for="player1_game8" class="form-label">Коэффициент гейма 8:</label>
-                            <input type="number" step="0.001" class="form-control" id="player1_game8" name="game8" required>
+                         <div class="mb-1">
+                            <label for="player1_game8" class="form-label">Гейм 8:</label>
+                            <input type="number" step="0.001" class="form-control form-control-sm" id="player1_game8" name="game8" required>
                         </div>
-                        <div class="mb-3">
-                            <label for="player1_game9" class="form-label">Коэффициент гейма 9:</label>
-                            <input type="number" step="0.001" class="form-control" id="player1_game9" name="game9" required>
+                         <div class="mb-1">
+                            <label for="player1_game9" class="form-label">Гейм 9:</label>
+                            <input type="number" step="0.001" class="form-control form-control-sm" id="player1_game9" name="game9" required>
                         </div>
-                        <div class="mb-3">
-                            <label for="player1_game10" class="form-label">Коэффициент гейма 10:</label>
-                            <input type="number" step="0.001" class="form-control" id="player1_game10" name="game10" required>
+                         <div class="mb-1">
+                            <label for="player1_game10" class="form-label">Гейм 10:</label>
+                            <input type="number" step="0.001" class="form-control form-control-sm" id="player1_game10" name="game10" required>
                         </div>
                     </form>
                 </div>
 
-                <div class="col-md-6">
-                    <h3 class="mb-3">Игрок 2</h3>
-                    <form id="player2Form">
-                        <div class="mb-3">
-                            <label for="player2_game5" class="form-label">Коэффициент гейма 5:</label>
-                            <input type="number" step="0.001" class="form-control" id="player2_game5" name="game5" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="player2_game6" class="form-label">Коэффициент гейма 6:</label>
-                            <input type="number" step="0.001" class="form-control" id="player2_game6" name="game6" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="player2_game7" class="form-label">Коэффициент гейма 7:</label>
-                            <input type="number" step="0.001" class="form-control" id="player2_game7" name="game7" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="player2_game8" class="form-label">Коэффициент гейма 8:</label>
-                            <input type="number" step="0.001" class="form-control" id="player2_game8" name="game8" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="player2_game9" class="form-label">Коэффициент гейма 9:</label>
-                            <input type="number" step="0.001" class="form-control" id="player2_game9" name="game9" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="player2_game10" class="form-label">Коэффициент гейма 10:</label>
-                            <input type="number" step="0.001" class="form-control" id="player2_game10" name="game10" required>
-                        </div>
-                    </form>
+                <div class="col-6"> {# Используем col-6 для 2 колонок на всех размерах #}
+                    <h3 class="text-center mb-2">Игрок 2</h3> {# Выравниваем заголовок по центру и уменьшаем отступ #}
+                     <form id="player2Form">
+                         <div class="mb-1">
+                             <label for="player2_game5" class="form-label">Гейм 5:</label>
+                             <input type="number" step="0.001" class="form-control form-control-sm" id="player2_game5" name="game5" required>
+                         </div>
+                         <div class="mb-1">
+                             <label for="player2_game6" class="form-label">Гейм 6:</label>
+                             <input type="number" step="0.001" class="form-control form-control-sm" id="player2_game6" name="game6" required>
+                         </div>
+                         <div class="mb-1">
+                             <label for="player2_game7" class="form-label">Гейм 7:</label>
+                             <input type="number" step="0.001" class="form-control form-control-sm" id="player2_game7" name="game7" required>
+                         </div>
+                         <div class="mb-1">
+                             <label for="player2_game8" class="form-label">Гейм 8:</label>
+                             <input type="number" step="0.001" class="form-control form-control-sm" id="player2_game8" name="game8" required>
+                         </div>
+                         <div class="mb-1">
+                             <label for="player2_game9" class="form-label">Гейм 9:</label>
+                             <input type="number" step="0.001" class="form-control form-control-sm" id="player2_game9" name="game9" required>
+                         </div>
+                         <div class="mb-1">
+                             <label for="player2_game10" class="form-label">Гейм 10:</label>
+                             <input type="number" step="0.001" class="form-control form-control-sm" id="player2_game10" name="game10" required>
+                         </div>
+                     </form>
                 </div>
             </div>
 
