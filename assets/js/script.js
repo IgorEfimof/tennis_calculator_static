@@ -1,37 +1,29 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Порядок полей ввода для автоперехода
     const fields = [
         'g5p1', 'g5p2', 'g6p1', 'g6p2', 'g7p1', 'g7p2', 'g8p1', 'g8p2', 'g9p1', 'g9p2', 'g10p1', 'g10p2'
     ];
 
-    // Функция для форматирования и автоперехода
     function handleInput(e, idx) {
         let input = e.target;
-        // Удаляем все кроме цифр
         let val = input.value.replace(/[^\d]/g, '');
 
-        // Добавляем точку после первой цифры
         if (val.length > 1) {
             val = val.slice(0, 1) + '.' + val.slice(1, 3);
         }
-        // Ограничиваем длину
         if (val.length > 4) val = val.slice(0, 4);
 
         input.value = val;
 
-        // Если введено 4 символа (например, 1.62), переходим к следующему полю
         if (val.length === 4) {
             if (idx < fields.length - 1) {
                 document.getElementById(fields[idx + 1]).focus();
             } else {
-                // Последнее поле, убираем фокус (скрываем клавиатуру) и считаем
                 input.blur();
                 calculateWinner();
             }
         }
     }
 
-    // Обработка вставки (paste)
     function handlePaste(e, idx) {
         e.preventDefault();
         let text = (e.clipboardData || window.clipboardData).getData('text');
@@ -52,16 +44,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Назначаем обработчики всем полям
     fields.forEach((id, idx) => {
         const input = document.getElementById(id);
         input.setAttribute('maxlength', '4');
         input.setAttribute('inputmode', 'decimal');
+        input.classList.add('text-center');
 
         input.addEventListener('input', (e) => handleInput(e, idx));
         input.addEventListener('paste', (e) => handlePaste(e, idx));
-
-        // При нажатии Enter — переход к следующему полю или расчет
         input.addEventListener('keypress', function(event) {
             if (event.key === 'Enter') {
                 event.preventDefault();
@@ -75,7 +65,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Автоматический расчет при заполнении всех полей
     function calculateWinner() {
         let player1Coeffs = [], player2Coeffs = [];
         let allFilled = true;
@@ -105,7 +94,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('error').style.display = 'none';
         document.getElementById('error').textContent = '';
 
-        // Сумма десятичных частей
         const sumDecimalPlayer1 = player1Coeffs.reduce((sum, coeff) => sum + (coeff % 1), 0);
         const sumDecimalPlayer2 = player2Coeffs.reduce((sum, coeff) => sum + (coeff % 1), 0);
 
